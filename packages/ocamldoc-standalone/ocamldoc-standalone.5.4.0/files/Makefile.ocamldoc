@@ -1,0 +1,99 @@
+#**************************************************************************
+#*                                                                        *
+#*                                 OCaml                                  *
+#*                                                                        *
+#*                          Samuel Hym, Tarides                           *
+#*                                                                        *
+#*   Copyright 2026 Tarides                                               *
+#*                                                                        *
+#*   All rights reserved.  This file is distributed under the terms of    *
+#*   the GNU Lesser General Public License version 2.1, with the          *
+#*   special exception on linking described in the file LICENSE.          *
+#*                                                                        *
+#**************************************************************************
+
+LIBOCAML ?= $(shell ocamlc -config-var standard_library)
+
+MKDIR=mkdir -p
+
+ifeq "$(wildcard Makefile.build_config)" ""
+# For stage 1 only
+-include $(LIBOCAML)/Makefile.config
+else
+ROOTDIR := .
+include Makefile.build_config
+endif
+
+# Stage 1: reconfigure
+# Enforce --disable-dependency-generation to make sure the .depend that will be
+# generated in 'build' will not be overwritten again
+.PHONY: reconfigure
+reconfigure:
+	./configure $(CONFIGURE_ARGS) --enable-ocamldoc \
+	  --disable-dependency-generation
+
+# Stage 2: build ocamldoc
+
+PROGRAMS=$(addsuffix $(EXE), \
+           $(foreach f, \
+             ocamlc ocamlopt yacc/ocamlyacc lex/ocamllex, \
+             $(f) $(f).opt))
+OVERRIDES=OCAMLRUN=ocamlrun NEW_OCAMLRUN=ocamlrun \
+  CAMLC=ocamlc CAMLOPT=ocamlopt \
+  BEST_OCAMLC=ocamlc BEST_OCAMLOPT=ocamlopt \
+  BEST_OCAMLLEX=ocamllex OCAMLYACC=ocamlyacc \
+  $(addprefix -o $(EMPTY),$(PROGRAMS) ocamllex)
+
+ifeq "$(NATIVE_COMPILER)" "true"
+OCAMLDOC_TGT := ocamldoc ocamldoc.opt
+else
+OCAMLDOC_TGT := ocamldoc
+endif
+
+VPATH = +compiler-libs +unix +str +dynlink
+ocamldoc_LIBRARIES = \
+  $(addprefix $(LIBOCAML)/, \
+    compiler-libs/ocamlcommon \
+    unix/unix \
+    str/str \
+    dynlink/dynlink) \
+  ocamldoc/odoc_info
+
+.PHONY: build
+build: Makefile.build_config
+	$(MAKE) $(OVERRIDES) \
+	  $(patsubst %.mll,%.ml, $(wildcard ocamldoc/*.mll)) \
+	  $(patsubst %.mly,%.mli, $(wildcard ocamldoc/*.mly)) \
+	  $(patsubst %.mly,%.ml, $(wildcard ocamldoc/*.mly))
+	ocamldep -slash -I ocamldoc ocamldoc/*.ml ocamldoc/*.mli > .depend
+	$(MAKE) $(OVERRIDES) $(OCAMLDOC_TGT) VPATH="$(VPATH)" \
+	  ocamldoc_LIBRARIES="$(ocamldoc_LIBRARIES)"
+
+%.install:
+	$(MAKE) --no-print-directory --quiet -f Makefile.ocamldoc print-install > $@
+
+.PHONY: print-install
+# FIXME: This installs too much, using wildcards liberally
+print-install:
+	$(info bin: [)
+	$(foreach f,\
+	  ocamldoc/ocamldoc$(EXE) $(wildcard ocamldoc/ocamldoc.opt$(EXE)),\
+	  $(info $(patsubst %,$(EMPTY)  "%",$(f))))
+	$(info ])
+	$(info lib: [)
+	$(foreach f,\
+	  ocamldoc/ocamldoc.hva ocamldoc/odoc_info.cma ocamldoc/META \
+	  $(wildcard ocamldoc/*.cmi) \
+	  $(wildcard ocamldoc/*.cmx) \
+	  $(wildcard ocamldoc/odoc_info.$(A)) \
+	  $(wildcard ocamldoc/odoc_info.cmxa), \
+	  $(info $(patsubst %,$(EMPTY)  "%",$(f))))
+ifeq "$(INSTALL_SOURCE_ARTIFACTS)" "true"
+	$(foreach f,\
+	  $(wildcard ocamldoc/*.mli) \
+	  $(wildcard ocamldoc/*.cmt) \
+	  $(wildcard ocamldoc/*.cmti), \
+	  $(info $(patsubst %,$(EMPTY)  "%",$(f))))
+endif
+	$(info ])
+	@:

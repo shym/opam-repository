@@ -1,0 +1,11 @@
+opam-version: "2.0"
+license: "LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception"
+synopsis: "Virtual package to ensure ocamldoc is available"
+maintainer: "Samuel Hym <samuel@tarides.com>"
+authors: "Samuel Hym <samuel@tarides.com>"
+homepage: "https://ocaml.org"
+bug-reports: "https://github.com/ocaml/opam-repository/issues"
+dev-repo: "git+https://github.com/ocaml/ocaml.git"
+depends: [
+  "base-ocamldoc" | "ocamldoc-standalone"
+]
