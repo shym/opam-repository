@@ -70,10 +70,13 @@ build: Makefile.build_config
 	  ocamldoc_LIBRARIES="$(ocamldoc_LIBRARIES)"
 
 %.install:
-	$(MAKE) --no-print-directory --quiet -f Makefile.ocamldoc print-install > $@
+	$(MAKE) --no-print-directory --quiet -f Makefile.ocamldoc \
+	  print-install > $@
 
 .PHONY: print-install
-# FIXME: This installs too much, using wildcards liberally
+# FIXME: This installs more *.{mli,cmt,cmti} than OCaml's make install, probably
+# because it is using wildcards liberally. Is it worth to make it consistent (in
+# which case, which one should be fixed, by the way?)?
 print-install:
 	$(info bin: [)
 	$(foreach f,\

@@ -46,6 +46,6 @@ url {
 extra-files: [
   [
     "Makefile.ocamldoc"
-    "sha256=2372b6215ea9092bf2aa522c9cfe934247cdb349760e17c0be6b8f670cb3872f"
+    "sha256=4791fc1ba5cc1d8ce06e4fd6164e913b616d0587246bc0f06536acc2a656d68c"
   ]
 ]
