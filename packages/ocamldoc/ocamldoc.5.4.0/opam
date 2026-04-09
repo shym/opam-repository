@@ -23,7 +23,7 @@ depends: [
   "ocaml" {= "5.4.0"}
 ]
 depopts: [
-  "base-ocamldoc"
+  "ocaml-option-no-ocamldoc"
 ]
 # FIXME: Should we keep this from ocaml-compiler?
 # build-env: [
@@ -32,9 +32,12 @@ depopts: [
 #   [ASAN_OPTIONS = "detect_leaks=0,exitcode=0"]
 # ]
 build: [
-  [make "-f" "Makefile.ocamldoc" "reconfigure"] {!base-ocamldoc:installed}
-  [make "-f" "Makefile.ocamldoc" "build" "-j%{jobs}%"] {!base-ocamldoc:installed}
-  [make "-f" "Makefile.ocamldoc" "%{name}%.install"] {!base-ocamldoc:installed}
+  [make "-f" "Makefile.ocamldoc" "reconfigure"]
+    {ocaml-option-no-ocamldoc:installed}
+  [make "-f" "Makefile.ocamldoc" "build" "-j%{jobs}%"]
+    {ocaml-option-no-ocamldoc:installed}
+  [make "-f" "Makefile.ocamldoc" "%{name}%.install"]
+    {ocaml-option-no-ocamldoc:installed}
 ]
 url {
   src: "https://github.com/ocaml/ocaml/releases/download/5.4.0/ocaml-5.4.0.tar.gz"

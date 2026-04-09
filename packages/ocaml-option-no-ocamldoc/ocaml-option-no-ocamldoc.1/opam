@@ -8,5 +8,4 @@ depends: [
   "ocaml-compiler" {post & >= "5.4.0"}
 ]
 maintainer: "Samuel Hym <samuel@tarides.com>"
-conflicts: "base-ocamldoc"
 flags: compiler
