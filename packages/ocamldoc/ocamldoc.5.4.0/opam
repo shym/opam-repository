@@ -1,11 +1,48 @@
 opam-version: "2.0"
 license: "LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception"
-synopsis: "Virtual package to ensure ocamldoc is available"
+synopsis: "The OCaml documentation generator distributed with the compiler"
+description: """
+Build and install the ocamldoc binary and library from the OCaml
+compiler distribution if it was not installed by the compiler
+package itself, and just depend on the compiler package otherwise.
+"""
 maintainer: "Samuel Hym <samuel@tarides.com>"
-authors: "Samuel Hym <samuel@tarides.com>"
+authors: [
+  "Xavier Leroy"
+  "Damien Doligez"
+  "Alain Frisch"
+  "Jacques Garrigue"
+  "Didier Rémy"
+  "KC Sivaramakrishnan"
+  "Jérôme Vouillon"
+]
 homepage: "https://ocaml.org"
 bug-reports: "https://github.com/ocaml/opam-repository/issues"
-dev-repo: "git+https://github.com/ocaml/ocaml.git"
+dev-repo: "git+https://github.com/ocaml/ocaml.git#5.4"
 depends: [
-  "base-ocamldoc" | "ocamldoc-standalone"
+  "ocaml" {= "5.4.0"}
+]
+depopts: [
+  "base-ocamldoc"
+]
+# FIXME: Should we keep this from ocaml-compiler?
+# build-env: [
+#   [MSYS2_ARG_CONV_EXCL = "*"]
+#   [LSAN_OPTIONS = "detect_leaks=0,exitcode=0"]
+#   [ASAN_OPTIONS = "detect_leaks=0,exitcode=0"]
+# ]
+build: [
+  [make "-f" "Makefile.ocamldoc" "reconfigure"] {!base-ocamldoc:installed}
+  [make "-f" "Makefile.ocamldoc" "build" "-j%{jobs}%"] {!base-ocamldoc:installed}
+  [make "-f" "Makefile.ocamldoc" "%{name}%.install"] {!base-ocamldoc:installed}
+]
+url {
+  src: "https://github.com/ocaml/ocaml/releases/download/5.4.0/ocaml-5.4.0.tar.gz"
+  checksum: "sha256=6fcf1b192e389e54c4f5cb51306ab2baee2a54a25b1770366de5a8b42695996e"
+}
+extra-files: [
+  [
+    "Makefile.ocamldoc"
+    "sha256=2372b6215ea9092bf2aa522c9cfe934247cdb349760e17c0be6b8f670cb3872f"
+  ]
 ]
