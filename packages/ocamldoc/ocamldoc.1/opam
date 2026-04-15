@@ -1,0 +1,7 @@
+opam-version: "2.0"
+synopsis:
+  "ocamldoc binary and libraries distributed with the OCaml compiler"
+maintainer: "Samuel Hym <samuel@tarides.com>"
+depends: [
+  "ocaml" {< "5.4.0"}
+]
