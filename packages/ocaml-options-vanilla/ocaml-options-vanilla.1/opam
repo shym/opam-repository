@@ -29,6 +29,7 @@ conflicts: [
   "ocaml-option-no-flat-float-array"
   # See constraint in ocaml-option-no-compression
   "ocaml-option-no-compression" {os != "win32"}
+  "ocaml-option-no-ocamldoc"
   "ocaml-option-spacetime"
   "ocaml-option-static"
   "ocaml-option-nnp"
