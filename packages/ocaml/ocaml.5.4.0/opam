@@ -22,6 +22,7 @@ depends: [
   "ocaml-variants" {>= "5.4.0~" & < "5.4.1~"} |
   "ocaml-system" {>= "5.4.0~" & < "5.4.1~"} |
   "dkml-base-compiler" {>= "5.4.0~" & < "5.4.1~"}
+  "ocaml-option-no-ocamldoc"
 ]
 flags: [conf]
 setenv: [
