@@ -5,7 +5,7 @@ homepage: "https://opam.ocaml.org"
 bug-reports: "https://github.com/ocaml/opam-repository/issues"
 license: "CC0-1.0+"
 depends: [
-  "ocaml-variants" {post & = "5.4.0"}
+  "ocaml-variants" {post & >= "5.4.0" & < "5.5.0"}
 ]
 maintainer: "Samuel Hym <samuel@tarides.com>"
 flags: compiler

@@ -73,6 +73,7 @@ build: [
     "--with-afl" {ocaml-option-afl:installed}
     "--disable-native-compiler" {ocaml-option-bytecode-only:installed}
     "--disable-flat-float-array" {ocaml-option-no-flat-float-array:installed}
+    "--disable-ocamldoc" {ocaml-option-no-ocamldoc:installed}
     "--enable-flambda" {ocaml-option-flambda:installed}
     "--enable-frame-pointers" {ocaml-option-fp:installed}
     "--without-zstd" {ocaml-option-no-compression:installed}
@@ -109,6 +110,7 @@ depopts: [
   "ocaml-option-flambda"
   "ocaml-option-fp"
   "ocaml-option-no-compression"
+  "ocaml-option-no-ocamldoc"
   "ocaml-option-musl"
   "ocaml-option-leak-sanitizer"
   "ocaml-option-address-sanitizer"
