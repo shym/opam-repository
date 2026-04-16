@@ -19,6 +19,7 @@ depends: [
   "camlidl"
   "ocamlbuild" {build}
   "conf-m4"    {build}
+  "ocamldoc"
 ]
 patches : [
   "compilation_ocaml5.diff" { ocaml:version >= "5" }

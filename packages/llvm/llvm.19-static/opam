@@ -35,6 +35,7 @@ depends: [
   "ocamlfind" {build}
   "conf-llvm-static" {build & = "19"}
   "conf-cmake" {build}
+  "ocamldoc"
 ]
 patches: [
   "AddOCaml.cmake.patch"

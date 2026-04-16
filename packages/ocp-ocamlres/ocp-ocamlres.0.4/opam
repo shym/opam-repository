@@ -23,6 +23,7 @@ depends: [
   "base-unix"
   "pprint"
   "astring"
+  "ocamldoc"
 ]
 synopsis: "Manipulation, injection and extraction of embedded resources"
 description: """

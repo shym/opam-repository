@@ -5,6 +5,7 @@ remove: [["ocamlfind" "remove" "exnsource"]]
 depends: [
   "ocaml" {>= "4.02.0"}
   "ocamlfind"
+  "ocamldoc"
 ]
 dev-repo: "git+https://github.com/johnwhitington/exn-source"
 install: [make "install"]

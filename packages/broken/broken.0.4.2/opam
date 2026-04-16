@@ -28,6 +28,7 @@ depends: [
   "bsdowl" {>= "3.0.0"}
   "conf-bmake"
   "conf-cpio"
+  "ocamldoc"
 ]
 synopsis: "The Broken package is a simple testsuite framework."
 description: "WWW: https://github.com/michipili/broken"

@@ -24,6 +24,7 @@ depends: [
   "conf-mpfr-paths"
   "conf-perl" {build}
   "bigarray-compat"
+  "ocamldoc"
 ]
 conflicts: [
   "mlgmp"

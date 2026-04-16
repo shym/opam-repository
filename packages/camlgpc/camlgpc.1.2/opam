@@ -8,7 +8,7 @@ license: "MIT"
 build: [[make]]
 install: [[make "install"]]
 remove: [["ocamlfind" "remove" "camlgpc"]]
-depends: ["ocaml" "ocamlfind"]
+depends: ["ocaml" "ocamlfind" "ocamldoc"]
 synopsis: "Interface to Alan Murta's General Polygon Clipper"
 flags: light-uninstall
 url {
