@@ -18,7 +18,7 @@ depends: [
 ]
 synopsis: "Adds support for ocaml-secondary-compiler to ocamlfind"
 description: """
-Exposes the compiler built by the ocaml-secondary-compielr package via
+Exposes the compiler built by the ocaml-secondary-compiler package via
 -toolchain secondary. A virtual package called ocaml is also installed to
 locate the binary directory via `ocamlfind -toolchain secondary query ocaml`."""
 authors: ["Gerd Stolpmann <gerd@gerd-stolpmann.de>" "David Allsopp <david.allsopp@metastack.com>"]
