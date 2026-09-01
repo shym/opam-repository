@@ -28,4 +28,6 @@ x-ci-accept-failures: [
   "opensuse-tumbleweed"
   "freebsd-15.1"
   "macos-homebrew"
+  "cygwin-mingw"
+  "msys2-mingw"
 ]
