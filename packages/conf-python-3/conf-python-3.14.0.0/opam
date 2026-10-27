@@ -7,7 +7,11 @@ bug-reports: "https://github.com/ocaml/opam-repository/issues"
 build: [
   ["env"]
   ["sh" "-c" "ls -al /usr/bin/pyt*"]
-  ["python3" "--version"]
+  ["sh" "-c" "ls -al /etc/alternatives/pyt*"]
+  ["ls" "-ald" "/bin" "/usr/bin"]
+  ["command" "-v" "python3"]
+  ["command" "-v" "python3.exe"]
+  ["sh" "-c" "python3 --version"]
 ]
 depexts: [
   ["python3"] {os-family = "debian" | os-family = "ubuntu"}
