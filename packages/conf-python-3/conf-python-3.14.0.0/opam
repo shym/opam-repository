@@ -6,6 +6,8 @@ license: "PSF-2.0"
 bug-reports: "https://github.com/ocaml/opam-repository/issues"
 build: [
   ["env"]
+  ["find" "/usr/bin"]
+  ["find" "/bin"]
   ["python3" "--version"]
 ]
 depexts: [
