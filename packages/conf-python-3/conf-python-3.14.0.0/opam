@@ -9,8 +9,8 @@ build: [
   ["sh" "-c" "ls -al /usr/bin/pyt*"]
   ["sh" "-c" "ls -al /etc/alternatives/pyt*"]
   ["ls" "-ald" "/bin" "/usr/bin"]
-  ["command" "-v" "python3"]
-  ["command" "-v" "python3.exe"]
+  ["sh" "-c" "command -v python3"]
+  ["sh" "-c" "command -v python3.exe"]
   ["sh" "-c" "python3 --version"]
 ]
 depexts: [
