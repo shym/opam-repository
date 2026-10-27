@@ -4,7 +4,10 @@ homepage: "https://www.python.org/downloads/release/python-3148/"
 authors: "Python Software Foundation"
 license: "PSF-2.0"
 bug-reports: "https://github.com/ocaml/opam-repository/issues"
-build: ["python3" "--version"]
+build: [
+  ["env"]
+  ["python3" "--version"]
+]
 depexts: [
   ["python3"] {os-family = "debian" | os-family = "ubuntu"}
   ["python3"] {os-distribution = "nixos"}

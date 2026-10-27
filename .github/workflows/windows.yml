@@ -66,7 +66,7 @@ jobs:
                              added: slice.filter(p => !edited_set.has(p)).join(' '),
                            };
                          });
-            return {windows_environment: ['cygwin', 'msys2'], packages: splits};
+            return {windows_environment: ['cygwin'], packages: splits};
 
   build:
     name: "target/host: x86_64-w64-mingw32, build: ${{ matrix.windows_environment }}"
@@ -76,6 +76,8 @@ jobs:
     if: ${{ fromJSON(needs.analyse.outputs.matrix).packages[0] != null }}
     runs-on: windows-latest
     needs: analyse
+    env:
+      OPAMVERBOSEON: conf-python-3
     steps:
       - name: Checkout tree
         uses: actions/checkout@v7
