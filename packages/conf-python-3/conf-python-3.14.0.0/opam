@@ -6,9 +6,6 @@ license: "PSF-2.0"
 bug-reports: "https://github.com/ocaml/opam-repository/issues"
 build: [
   ["env"]
-  ["sh" "-c" "ls -al /usr/bin/pyt*"]
-  ["sh" "-c" "ls -al /etc/alternatives/pyt*"]
-  ["ls" "-ald" "/bin" "/usr/bin"]
   ["sh" "-c" "command -v python3"]
   ["sh" "-c" "command -v python3.exe"]
   ["sh" "-c" "python3 --version"]
@@ -31,6 +28,7 @@ depexts: [
   ["python3"] {os-distribution = "homebrew" & os = "macos"}
   ["system:python3"] {os-distribution = "cygwinports"}
   ["python3"] {os-distribution = "cygwin"}
+  ["python"] {os-distribution = "msys2"}
 ]
 synopsis: "Virtual package relying on Python-3 installation"
 description: """
